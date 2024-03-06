@@ -47,9 +47,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: '',
+      title: 'Gun Shop',
       filename: 'index.html',
-      source: 'src/template.html',
+      template: 'src/template.html',
       minify: {
         collapseWhitespace: false,
       },
