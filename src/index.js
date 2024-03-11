@@ -37,20 +37,35 @@ const catImageSlider = new ImageSlider([
   bengal,
 ]);
 
-renderImage(catImageSlider);
-renderIndicators(catImageSlider);
-fillIndicator(catImageSlider);
+let forwardLoop;
 
-document.querySelector('#forwards-button').addEventListener('click', () => {
+function advanceSlider() {
   catImageSlider.cycleForwards();
   renderImage(catImageSlider);
   advanceIndex(catImageSlider);
   fillIndicator();
-});
+  forwardLoop = setTimeout(advanceSlider, 5000);
+}
 
-document.querySelector('#back-button').addEventListener('click', () => {
+function regressSlider() {
   catImageSlider.cycleBackwards();
   renderImage(catImageSlider);
   regressIndex(catImageSlider);
   fillIndicator();
+  forwardLoop = setTimeout(advanceSlider, 5000);
+}
+
+document.querySelector('#forwards-button').addEventListener('click', () => {
+  clearTimeout(forwardLoop);
+  advanceSlider();
 });
+
+document.querySelector('#back-button').addEventListener('click', () => {
+  clearTimeout(forwardLoop);
+  regressSlider();
+});
+
+renderImage(catImageSlider);
+renderIndicators(catImageSlider);
+fillIndicator();
+setTimeout(advanceSlider, 5000);
