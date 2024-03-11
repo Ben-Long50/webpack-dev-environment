@@ -1,10 +1,21 @@
 import './styles/main.css';
 import './styles/reset-css.css';
-import renderImage from './renderDom';
+import renderImage, {
+  renderIndicators,
+  advanceIndex,
+  regressIndex,
+  fillIndicator,
+} from './renderDom';
+import turkishAngora from './assets/turkish-angora.jpg';
+import scottishFold from './assets/scottish-fold.jpg';
+import norwegianForestCat from './assets/norwegian-forest-cat.jpg';
+import maineCoon from './assets/maine-coon.jpg';
+import bengal from './assets/bengal.jpg';
 
 class ImageSlider {
   constructor(imageArray) {
     this.imageArray = imageArray;
+    this.count = imageArray.length;
   }
 
   cycleForwards() {
@@ -19,12 +30,27 @@ class ImageSlider {
 }
 
 const catImageSlider = new ImageSlider([
-  './assets/turkish-angora.jpg',
-  './assets/scottish-fold.jpg',
-  './assets/norwegian-forest-cat.jpg',
-  './assets/maine-coon.jpg',
-  './assets/bengal.jpg',
+  turkishAngora,
+  scottishFold,
+  norwegianForestCat,
+  maineCoon,
+  bengal,
 ]);
 
-console.log(catImageSlider);
 renderImage(catImageSlider);
+renderIndicators(catImageSlider);
+fillIndicator(catImageSlider);
+
+document.querySelector('#forwards-button').addEventListener('click', () => {
+  catImageSlider.cycleForwards();
+  renderImage(catImageSlider);
+  advanceIndex(catImageSlider);
+  fillIndicator();
+});
+
+document.querySelector('#back-button').addEventListener('click', () => {
+  catImageSlider.cycleBackwards();
+  renderImage(catImageSlider);
+  regressIndex(catImageSlider);
+  fillIndicator();
+});

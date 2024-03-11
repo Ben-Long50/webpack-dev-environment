@@ -10,18 +10,33 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ renderImage)
+/* harmony export */   "default": () => (/* binding */ renderImage),
+/* harmony export */   renderIndicators: () => (/* binding */ renderIndicators)
 /* harmony export */ });
-var imgContainer = document.querySelector('#image-contianer');
+var imgContainer = document.querySelector('#image-container');
+var indicatorContainer = document.querySelector('#indicator-container');
 function renderImage(slider) {
   if (imgContainer.firstChild) {
-    imgContainer.firstChild.remove();
+    imgContainer.removeChild(imgContainer.firstChild);
   }
   var imgElement = document.createElement('img');
   var imgUrl = slider.imageArray[0];
-  imgElement.innerHTML = "<%= require(".concat(imgUrl, ") %>");
+  imgElement.src = imgUrl;
   imgElement.classList.add('active-img');
   imgContainer.appendChild(imgElement);
+}
+function createIndicator() {
+  var svgCircle = document.createElement('svg');
+  svgCircle.height = '100';
+  svgCircle.width = '100';
+  svgCircle.innerHTML = '<circle cx="50" cy="50" r="5" stroke="black" stroke-width="2" fill="none" />';
+  return svgCircle;
+}
+function renderIndicators(slider) {
+  var count = slider.imageArray.length;
+  for (var i = 1; i < count; i++) {
+    indicatorContainer.appendChild(createIndicator());
+  }
 }
 
 /***/ }),
@@ -52,12 +67,12 @@ body {
 }
 
 body {
-  display: grid;
-  place-items: center;
+  /* display: grid; */
+  /* place-items: center; */
 }
 
 #image-carousel {
-  height: 50%;
+  height: 0.5vh;
   width: 50%;
   display: grid;
   grid-template-columns: 0.5fr 5fr 0.5fr;
@@ -72,6 +87,8 @@ body {
 #image-container {
   grid-column: 2/3;
   grid-row: 1/2;
+  display: grid;
+  place-items: center;
 }
 
 #indicator-container {
@@ -104,10 +121,10 @@ body {
 }
 
 .active-img {
-  width: 100%;
-  height: auto;
+  max-height: 100%;
+  max-width: 100%;
 }
-`, "",{"version":3,"sources":["webpack://./src/styles/main.css"],"names":[],"mappings":"AAAA;;EAEE,YAAY;EACZ,WAAW;AACb;;AAEA;EACE,aAAa;EACb,mBAAmB;AACrB;;AAEA;EACE,WAAW;EACX,UAAU;EACV,aAAa;EACb,sCAAsC;EACtC,4BAA4B;AAC9B;;AAEA;EACE,gBAAgB;EAChB,aAAa;AACf;;AAEA;EACE,gBAAgB;EAChB,aAAa;AACf;;AAEA;EACE,gBAAgB;EAChB,aAAa;AACf;;AAEA;EACE,gBAAgB;EAChB,aAAa;AACf;;AAEA;EACE,YAAY;EACZ,WAAW;AACb;;AAEA;;EAEE,mBAAmB;EACnB,6BAA6B;EAC7B,YAAY;EACZ,aAAa;AACf;;AAEA;;EAEE,sCAAsC;EACtC,oCAAoC;AACtC;;AAEA;EACE,WAAW;EACX,YAAY;AACd","sourcesContent":["html,\nbody {\n  height: 100%;\n  width: 100%;\n}\n\nbody {\n  display: grid;\n  place-items: center;\n}\n\n#image-carousel {\n  height: 50%;\n  width: 50%;\n  display: grid;\n  grid-template-columns: 0.5fr 5fr 0.5fr;\n  grid-template-rows: 10fr 1fr;\n}\n\n#back-button {\n  grid-column: 1/2;\n  grid-row: 1/3;\n}\n\n#image-container {\n  grid-column: 2/3;\n  grid-row: 1/2;\n}\n\n#indicator-container {\n  grid-column: 2/3;\n  grid-row: 2/3;\n}\n\n#forwards-button {\n  grid-column: 3/4;\n  grid-row: 1/3;\n}\n\n.arrow-image {\n  height: auto;\n  width: 100%;\n}\n\n#back-button,\n#forwards-button {\n  border-radius: 10px;\n  background-color: transparent;\n  border: none;\n  outline: none;\n}\n\n#back-button:hover,\n#forwards-button:hover {\n  transition: background-color 0.5s ease;\n  background-color: rgb(216, 216, 216);\n}\n\n.active-img {\n  width: 100%;\n  height: auto;\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/styles/main.css"],"names":[],"mappings":"AAAA;;EAEE,YAAY;EACZ,WAAW;AACb;;AAEA;EACE,mBAAmB;EACnB,yBAAyB;AAC3B;;AAEA;EACE,aAAa;EACb,UAAU;EACV,aAAa;EACb,sCAAsC;EACtC,4BAA4B;AAC9B;;AAEA;EACE,gBAAgB;EAChB,aAAa;AACf;;AAEA;EACE,gBAAgB;EAChB,aAAa;EACb,aAAa;EACb,mBAAmB;AACrB;;AAEA;EACE,gBAAgB;EAChB,aAAa;AACf;;AAEA;EACE,gBAAgB;EAChB,aAAa;AACf;;AAEA;EACE,YAAY;EACZ,WAAW;AACb;;AAEA;;EAEE,mBAAmB;EACnB,6BAA6B;EAC7B,YAAY;EACZ,aAAa;AACf;;AAEA;;EAEE,sCAAsC;EACtC,oCAAoC;AACtC;;AAEA;EACE,gBAAgB;EAChB,eAAe;AACjB","sourcesContent":["html,\nbody {\n  height: 100%;\n  width: 100%;\n}\n\nbody {\n  /* display: grid; */\n  /* place-items: center; */\n}\n\n#image-carousel {\n  height: 0.5vh;\n  width: 50%;\n  display: grid;\n  grid-template-columns: 0.5fr 5fr 0.5fr;\n  grid-template-rows: 10fr 1fr;\n}\n\n#back-button {\n  grid-column: 1/2;\n  grid-row: 1/3;\n}\n\n#image-container {\n  grid-column: 2/3;\n  grid-row: 1/2;\n  display: grid;\n  place-items: center;\n}\n\n#indicator-container {\n  grid-column: 2/3;\n  grid-row: 2/3;\n}\n\n#forwards-button {\n  grid-column: 3/4;\n  grid-row: 1/3;\n}\n\n.arrow-image {\n  height: auto;\n  width: 100%;\n}\n\n#back-button,\n#forwards-button {\n  border-radius: 10px;\n  background-color: transparent;\n  border: none;\n  outline: none;\n}\n\n#back-button:hover,\n#forwards-button:hover {\n  transition: background-color 0.5s ease;\n  background-color: rgb(216, 216, 216);\n}\n\n.active-img {\n  max-height: 100%;\n  max-width: 100%;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -761,6 +778,56 @@ function styleTagTransform(css, styleElement) {
 }
 module.exports = styleTagTransform;
 
+/***/ }),
+
+/***/ "./src/assets/bengal.jpg":
+/*!*******************************!*\
+  !*** ./src/assets/bengal.jpg ***!
+  \*******************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "bengal.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/maine-coon.jpg":
+/*!***********************************!*\
+  !*** ./src/assets/maine-coon.jpg ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "maine-coon.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/norwegian-forest-cat.jpg":
+/*!*********************************************!*\
+  !*** ./src/assets/norwegian-forest-cat.jpg ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "norwegian-forest-cat.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/scottish-fold.jpg":
+/*!**************************************!*\
+  !*** ./src/assets/scottish-fold.jpg ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "scottish-fold.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/turkish-angora.jpg":
+/*!***************************************!*\
+  !*** ./src/assets/turkish-angora.jpg ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "turkish-angora.jpg";
+
 /***/ })
 
 /******/ 	});
@@ -814,6 +881,18 @@ module.exports = styleTagTransform;
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -828,6 +907,29 @@ module.exports = styleTagTransform;
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && !scriptUrl) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/nonce */
@@ -846,12 +948,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/main.css */ "./src/styles/main.css");
 /* harmony import */ var _styles_reset_css_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles/reset-css.css */ "./src/styles/reset-css.css");
 /* harmony import */ var _renderDom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./renderDom */ "./src/renderDom.js");
+/* harmony import */ var _assets_turkish_angora_jpg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./assets/turkish-angora.jpg */ "./src/assets/turkish-angora.jpg");
+/* harmony import */ var _assets_scottish_fold_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./assets/scottish-fold.jpg */ "./src/assets/scottish-fold.jpg");
+/* harmony import */ var _assets_norwegian_forest_cat_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./assets/norwegian-forest-cat.jpg */ "./src/assets/norwegian-forest-cat.jpg");
+/* harmony import */ var _assets_maine_coon_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./assets/maine-coon.jpg */ "./src/assets/maine-coon.jpg");
+/* harmony import */ var _assets_bengal_jpg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./assets/bengal.jpg */ "./src/assets/bengal.jpg");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+
+
+
+
 
 
 
@@ -865,20 +977,27 @@ var ImageSlider = /*#__PURE__*/function () {
     value: function cycleForwards() {
       var removedIndex = this.imageArray.shift();
       this.imageArray.push(removedIndex);
-      console.log(this.imageArray);
     }
   }, {
     key: "cycleBackwards",
     value: function cycleBackwards() {
       var removedIndex = this.imageArray.pop();
       this.imageArray.unshift(removedIndex);
-      console.log(this.imageArray);
     }
   }]);
   return ImageSlider;
 }();
-var catImageSlider = new ImageSlider(['./src/assets/turkish-angora.jpg', './src/assets/scottish-fold.jpg', './src/assets/norwegian-forest-cat.jpg', './src/assets/maine-coon.jpg', './src/assets/bengal.jpg']);
+var catImageSlider = new ImageSlider([_assets_turkish_angora_jpg__WEBPACK_IMPORTED_MODULE_3__, _assets_scottish_fold_jpg__WEBPACK_IMPORTED_MODULE_4__, _assets_norwegian_forest_cat_jpg__WEBPACK_IMPORTED_MODULE_5__, _assets_maine_coon_jpg__WEBPACK_IMPORTED_MODULE_6__, _assets_bengal_jpg__WEBPACK_IMPORTED_MODULE_7__]);
 (0,_renderDom__WEBPACK_IMPORTED_MODULE_2__["default"])(catImageSlider);
+(0,_renderDom__WEBPACK_IMPORTED_MODULE_2__.renderIndicators)(catImageSlider);
+document.querySelector('#forwards-button').addEventListener('click', function () {
+  catImageSlider.cycleForwards();
+  (0,_renderDom__WEBPACK_IMPORTED_MODULE_2__["default"])(catImageSlider);
+});
+document.querySelector('#back-button').addEventListener('click', function () {
+  catImageSlider.cycleBackwards();
+  (0,_renderDom__WEBPACK_IMPORTED_MODULE_2__["default"])(catImageSlider);
+});
 })();
 
 /******/ })()

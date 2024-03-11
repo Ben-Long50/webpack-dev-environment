@@ -5,11 +5,13 @@ body {
 }
 
 body {
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #image-carousel {
+  position: relative;
   height: 50%;
   width: 50%;
   display: grid;
@@ -25,11 +27,17 @@ body {
 #image-container {
   grid-column: 2/3;
   grid-row: 1/2;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
 }
 
 #indicator-container {
   grid-column: 2/3;
   grid-row: 2/3;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 #forwards-button {
@@ -57,6 +65,9 @@ body {
 }
 
 .active-img {
-  width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  display: block;
   height: auto;
+  width: auto;
 }
