@@ -47,7 +47,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Gun Shop',
+      title: 'Image Slider',
       filename: 'index.html',
       template: 'src/template.html',
       minify: {
