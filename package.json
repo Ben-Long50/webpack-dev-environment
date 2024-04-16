@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode development",
+    "prod": "webpack --mode production",
     "dev": "webpack serve",
     "page": "git subtree push --prefix dist origin gh-pages"
   },
